@@ -1,0 +1,8 @@
+.card.job .inner .back {
+    background-color: teal;
+}
+
+.card.job .inner .front {
+    background-color: teal;
+    color: white;
+}
