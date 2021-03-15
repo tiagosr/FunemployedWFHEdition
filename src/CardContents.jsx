@@ -1,10 +1,10 @@
 import { memo, useState } from "react";
 
-export default memo(function CardContents({type, content, flipped: _flipped = false}) {
+export default memo(function CardContents({type, content, flipped: _flipped = false, locked = false}) {
     const [flipped, setFlipped] = useState(_flipped);
     
     const flipCard = e => {
-        setFlipped(!flipped);
+        if (!locked) setFlipped(!flipped);
         e.preventDefault();
     };
     
