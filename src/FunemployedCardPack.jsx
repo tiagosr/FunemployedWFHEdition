@@ -1,5 +1,5 @@
 import "./FunemployedCardPack.css";
-import { CardStack } from "./CardStack";
+import CardStack from "./CardStack";
 
 const jobs = [
     "Personal Trainer",
@@ -451,7 +451,7 @@ const qualifications = [
     "Red Sea"
 ];
 
-export const FunemployedCardPack = ({jobs_x, jobs_y, quals_x, quals_y}) => {
+export default function FunemployedCardPack({jobs_x, jobs_y, quals_x, quals_y}) {
     return (
         <>
             <CardStack cards={jobs} type="job" top={jobs_y} left={jobs_x} flipped={true} />

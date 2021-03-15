@@ -1,9 +1,12 @@
 .card {
-    display: inline-block;
+    display: block;
     width: 250px;
     height: 350px;
     background-color: transparent;
     perspective: 3000px;
+}
+.cardStack .card {
+    margin-bottom: -350px;
 }
 .dragPreview .card {
     transform: rotateZ(-15deg);

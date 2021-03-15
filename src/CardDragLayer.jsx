@@ -1,5 +1,5 @@
 import { useDragLayer } from 'react-dnd';
-import { CardDragPreview } from './CardDragPreview';
+import CardDragPreview from './CardDragPreview';
 
 const layerStyles = {
     position: "fixed",
@@ -16,7 +16,7 @@ const getItemStyles = (initialOffset, currentOffset) => {
     return { transform, WebkitTransform: transform };
 }
 
-export const CardDragLayer = () => {
+export default function CardDragLayer() {
     const { itemType, isDragging, item, initialOffset, currentOffset } = useDragLayer((monitor) => ({
         item: monitor.getItem(),
         itemType: monitor.getItemType(),

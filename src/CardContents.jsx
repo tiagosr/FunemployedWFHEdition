@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 
-export const CardContents = memo(({type, content, flipped: _flipped = false}) => {
+export default memo(function CardContents({type, content, flipped: _flipped = false}) {
     const [flipped, setFlipped] = useState(_flipped);
     
     const flipCard = e => {

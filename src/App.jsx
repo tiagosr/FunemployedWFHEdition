@@ -3,8 +3,8 @@ import './App.css';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Board from './Board';
-import { FunemployedCardPack } from "./FunemployedCardPack";
-import { CardDragLayer } from './CardDragLayer';
+import FunemployedCardPack from "./FunemployedCardPack";
+import CardDragLayer from './CardDragLayer';
 
 function App() {
   return (

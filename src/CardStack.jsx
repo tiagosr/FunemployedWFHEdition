@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback, useMemo, memo } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { useDrag } from "react-dnd";
-import { CardContents } from "./CardContents";
 import { getEmptyImage } from 'react-dnd-html5-backend';
+import CardContents from "./CardContents";
 
-export const CardStack = memo(({cards: _cards, type, flipped, top, left}) => {
+export default function CardStack ({cards: _cards, type, flipped, top, left}) {
     const [cards, setCards] = useState(_cards);
 
     const topCard = useMemo(() => {
@@ -18,11 +18,12 @@ export const CardStack = memo(({cards: _cards, type, flipped, top, left}) => {
         setCards(poppedCards);
     }, [cards]);
 
-    const [ , drag, preview] = useDrag(() => {
+    const [{isDragging}, drag, preview] = useDrag(() => {
         return {
             type: 'card',
             item: { id: `${type}-${cards.length-1}`, left, top, content: topCard, type, flipped, verb: 'create' },
             collect: (monitor) => {
+                
                 const item = monitor.getItem();
                 if (item) {
                     const {type: currentType, content: currentContent, verb} = item;
@@ -30,7 +31,9 @@ export const CardStack = memo(({cards: _cards, type, flipped, top, left}) => {
                         removeTopCard();
                     }
                 }
-                return { }
+                return {
+                    isDragging: monitor.isDragging()
+                }
             }
         }
     }, [cards, type, flipped, top, left, removeTopCard, topCard])
@@ -41,7 +44,8 @@ export const CardStack = memo(({cards: _cards, type, flipped, top, left}) => {
 
     if (topCard === null) return null;
 
-    return <div ref={drag} style={{ position:'absolute', top, left }}>
-        <CardContents content={topCard} type={type} flipped={flipped} />
+    return <div ref={drag} className="cardStack" style={{ position:'absolute', top, left }}>
+        <CardContents flipped={false} type={type} />
+        {isDragging?null:<CardContents content={topCard} type={type} flipped={flipped} />}
     </div>
-});
+};

@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { CardContents } from './CardContents';
+import CardContents from './CardContents';
 
 const Card = memo(({left, top, content, type, id, flipped = false}) => {
 

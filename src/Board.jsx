@@ -4,7 +4,7 @@ import "./Board.css";
 import Card from "./Card";
 import update from "immutability-helper";
 
-const Board = memo(({children}) => {
+const Board = memo(function Board({children}) {
     const [cardsInPlay, setCardsInPlay] = useState({})
 
     const [, drop] = useDrop(() => ({
@@ -32,7 +32,7 @@ const Board = memo(({children}) => {
 
     const cardComponents = useMemo(() => Object.keys(cardsInPlay).map(key => {
         const {id, left, top, content, type, flipped} = cardsInPlay[key];
-        return <Card id={id} left={left} top={top} content={content} type={type} flipped={flipped} />;
+        return <Card key={id} id={id} left={left} top={top} content={content} type={type} flipped={flipped} />;
     }), [cardsInPlay])
 
     return (
