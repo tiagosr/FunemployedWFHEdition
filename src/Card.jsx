@@ -1,60 +1,38 @@
-import React, { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
+import { CardContents } from './CardContents';
 
-const Card = memo(function Card ({left: _left, top: _top, content, type}) {
-    const ref = useRef(null);
-    const [top, setTop] = useState(_top);
-    const [left, setLeft] = useState(_left);
-
-    const moveTo = (_top, _left) => {
-        setTop(_top);
-        setLeft(_left);
-    }
-
-    useImperativeHandle(ref, () => ({
-        moveTo
-    }));
-    
-    const [flipped, setFlipped] = useState(false);
+const Card = memo(({left, top, content, type, id, flipped = false}) => {
 
     const [{isDragging}, drag, preview] = useDrag(() => ({
         type: 'card',
-        item: { ref, left, top },
+        item: { id, left, top, content, type, flipped, verb: "move" },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    }), [ref, left, top]);
+    }), [id, left, top]);
 
-    const flipCard = e => {
-        setFlipped(!flipped);
-        e.preventDefault();
-    };
-
-    /*
+    //*
     useEffect(() => {
-        preview(getEmptyImage(), {captureDraggingState: true});
+        preview(getEmptyImage(), {captureDraggingState: false});
     }, [preview]);
     //*/
     const getStyle = ({left, top, isDragging}) => ({
-        left, top,
-        transform: `rotateZ(${isDragging?-15:0}deg)`
+        position: "absolute",
+        transform: `translate3d(${left}px, ${top}px, 0)`,
+        WebkitTransform: `translate3d(${left}px, ${top}px, 0)`
     });
+
+    if (isDragging) return null;
 
     return (
         <div
-            ref={isDragging?preview:drag}
-            className={`card ${type} ${flipped?"flipped":""}`}
-            onClick={flipCard}
+            ref={drag}
             style={getStyle({left, top, isDragging})}>
-            <div className="inner">
-                <div className="front">
-                    <div className="content">{content}</div>
-                </div>
-                <div className="back"></div>
-            </div>
+            <CardContents type={type} content={content} flipped={flipped} />
         </div>
     )
-}, {});
+});
 
 export default Card;

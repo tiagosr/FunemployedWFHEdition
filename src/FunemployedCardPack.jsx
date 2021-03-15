@@ -1,5 +1,5 @@
 import "./FunemployedCardPack.css";
-import Card from "./Card";
+import { CardStack } from "./CardStack";
 
 const jobs = [
     "Personal Trainer",
@@ -454,8 +454,8 @@ const qualifications = [
 export const FunemployedCardPack = ({jobs_x, jobs_y, quals_x, quals_y}) => {
     return (
         <>
-            {jobs.map((job, index) => (<Card content={job} type="job" top={jobs_y} left={jobs_x} key={`job-${index}`} />))}
-            {qualifications.map((job, index) => (<Card content={job} type="qualification" top={quals_y} left={quals_x} key={`qual-${index}`} />))}
+            <CardStack cards={jobs} type="job" top={jobs_y} left={jobs_x} flipped={true} />
+            <CardStack cards={qualifications} type="qualification" top={quals_y} left={quals_x} flipped={true} />
         </>
     )
 }

@@ -1,16 +1,16 @@
-import Card from './Card';
 import Region from './Region';
 import './App.css';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Board from './Board';
 import { FunemployedCardPack } from "./FunemployedCardPack";
+import { CardDragLayer } from './CardDragLayer';
 
 function App() {
   return (
     <div className="App">
       <DndProvider backend={HTML5Backend}>
-
+        <CardDragLayer />
         <Board>
           <Region>
           </Region>  

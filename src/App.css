@@ -1,10 +1,12 @@
 .card {
-    position: absolute;
     display: inline-block;
     width: 250px;
     height: 350px;
     background-color: transparent;
     perspective: 3000px;
+}
+.dragPreview .card {
+    transform: rotateZ(-15deg);
 }
 .card .inner {
     position: relative;
