@@ -454,8 +454,8 @@ const qualifications = [
 export default function FunemployedCardPack({jobs_x, jobs_y, quals_x, quals_y}) {
     return (
         <>
-            <CardStack cards={jobs} type="job" top={jobs_y} left={jobs_x} flipped={true} />
-            <CardStack cards={qualifications} type="qualification" top={quals_y} left={quals_x} flipped={true} />
+            <CardStack cards={jobs} type="job" top={jobs_y} left={jobs_x} flipped={false} />
+            <CardStack cards={qualifications} type="qualification" top={quals_y} left={quals_x} flipped={false} />
         </>
     )
 }

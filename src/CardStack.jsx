@@ -10,6 +10,13 @@ export default function CardStack ({cards: _cards, type, flipped, top, left, top
                 return cards.slice(0, -1);
             case 'stack':
                 return [...cards, content];
+            case 'shuffle':
+                const shuffled = cards;
+                for (let i = shuffled.length - 1; i >= 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
             default:
                 return cards;
         }

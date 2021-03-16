@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useDragLayer } from 'react-dnd';
 import CardDragPreview from './CardDragPreview';
 
@@ -16,14 +17,14 @@ const getItemStyles = (initialOffset, currentOffset) => {
     return { transform, WebkitTransform: transform };
 }
 
-export default function CardDragLayer() {
+export default memo(function CardDragLayer() {
     const { itemType, isDragging, item, initialOffset, currentOffset } = useDragLayer((monitor) => ({
         item: monitor.getItem(),
         itemType: monitor.getItemType(),
         initialOffset: monitor.getInitialSourceClientOffset(),
         currentOffset: monitor.getSourceClientOffset(),
         isDragging: monitor.isDragging()
-    }));
+    }), []);
 
     const renderItem = () => {
         switch (itemType) {
@@ -41,4 +42,4 @@ export default function CardDragLayer() {
             {renderItem()}
         </div>
     </div>
-}
+});
